@@ -12,6 +12,7 @@ import (
 
 	"github.com/bazelbuild/remote-apis-sdks/go/digest"
 	"github.com/bazelbuild/remote-apis-sdks/go/pkg/chunker"
+	"github.com/bazelbuild/remote-apis-sdks/go/pkg/filemetadata"
 	"github.com/golang/protobuf/proto"
 	"github.com/pborman/uuid"
 	"golang.org/x/sync/errgroup"
@@ -31,6 +32,8 @@ func (c *Client) UploadIfMissing(ctx context.Context, data ...*chunker.Chunker) 
 	const (
 		logInterval = 25
 	)
+	e := filemetadata.FileError{}
+	_ := e
 
 	var dgs []digest.Digest
 	chunkers := make(map[digest.Digest]*chunker.Chunker)
